@@ -1,4 +1,4 @@
-19.10	8.0p1	-4	Eoan Ermine		SSH-2.0-OpenSSH_8.0p1 Ubuntu-6build1
+19.10	8.0p1	-6	Eoan Ermine		SSH-2.0-OpenSSH_8.0p1 Ubuntu-6build1
 19.04	7.9p1	-10	Disco Dingo		SSH-2.0-OpenSSH_7.9p1 Ubuntu-10
 18.10	7.7p1	-4	Cosmic Cuttlefish	SSH-2.0-OpenSSH_7.7p1 Ubuntu-4
 18.04	7.6p1	-4	Bionic Beaver		SSH-2.0-OpenSSH_7.6p1 Ubuntu-4ubuntu0.3
