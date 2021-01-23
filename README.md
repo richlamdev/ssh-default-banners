@@ -31,11 +31,11 @@ nmap -p22 -sV --script ssh-os.nse <target>
 nmap -p <port number> -sV --script ssh-os.nse <target>
 ```
 
-#### Link to Medium Post:
+#### Medium Post:
 
 https://medium.com/@richlam.dev/nmap-ubuntu-debian-freebsd-version-discovery-ssh-oh-ece7e46af26e
 
-#### Link to Nmap Pull Request:
+#### Nmap Pull Request:
 
 https://github.com/nmap/nmap/pull/1728
 
