@@ -11,9 +11,9 @@ Identifies the following versions:
 
 Ubuntu 4.10 to 20.10
 
-FreeBSD 4.3 to 12.1-RELEASE
+FreeBSD 4.3 to 12.2-RELEASE
 
-Debian 4.x to 10.x
+Debian 3.x to 10.x
 
 
 Note: The accuracy of the response is based on the default banner response.
@@ -26,7 +26,9 @@ A number of scenarios may provide an inaccurate result from the target host:
 
 #### Usage:
 ```
-nmap -p22 --script ssh-os.nse <target>
+nmap -p22 -sV --script ssh-os.nse <target>
+  OR
+nmap -p <port number> -sV --script ssh-os.nse <target>
 ```
 
 #### Link to Medium Post:
@@ -37,3 +39,6 @@ https://medium.com/@richlam.dev/nmap-ubuntu-debian-freebsd-version-discovery-ssh
 
 https://github.com/nmap/nmap/pull/1728
 
+#### Some banners from:
+
+https://github.com/rapid7/recog/blob/master/xml/ssh_banners.xml
