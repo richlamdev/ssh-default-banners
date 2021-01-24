@@ -172,39 +172,6 @@ while incorporating banners into the this nmap NSE.
 
   <!-- Debian -->
 
-  <fingerprint pattern="^OpenSSH_([^\s]+)\s+(Debian.+woody.*)$">
-    <description>OpenSSH running on Debian 3.0 (woody)</description>
-    <example service.version="3.4p1" openssh.comment="Debian 1:3.4p1-1.woody.3">OpenSSH_3.4p1 Debian 1:3.4p1-1.woody.3</example>
-    <param pos="1" name="service.version"/>
-    <param pos="2" name="openssh.comment"/>
-    <param pos="0" name="service.vendor" value="OpenBSD"/>
-    <param pos="0" name="service.family" value="OpenSSH"/>
-    <param pos="0" name="service.product" value="OpenSSH"/>
-    <param pos="0" name="service.cpe23" value="cpe:/a:openbsd:openssh:{service.version}"/>
-    <param pos="0" name="os.vendor" value="Debian"/>
-    <param pos="0" name="os.family" value="Linux"/>
-    <param pos="0" name="os.product" value="Linux"/>
-    <param pos="0" name="os.version" value="3.0"/>
-    <param pos="0" name="os.cpe23" value="cpe:/o:debian:debian_linux:3.0"/>
-  </fingerprint>
-
-  <fingerprint pattern="^OpenSSH_([^\s]+)\s+(Debian.+sarge.*)$">
-    <description>OpenSSH running on Debian 3.1 (sarge)</description>
-    <example service.version="3.8.1p1" openssh.comment="Debian-8.sarge.4">OpenSSH_3.8.1p1 Debian-8.sarge.4</example>
-    <param pos="1" name="service.version"/>
-    <param pos="2" name="openssh.comment"/>
-    <param pos="0" name="service.vendor" value="OpenBSD"/>
-    <param pos="0" name="service.family" value="OpenSSH"/>
-    <param pos="0" name="service.product" value="OpenSSH"/>
-    <param pos="0" name="service.cpe23" value="cpe:/a:openbsd:openssh:{service.version}"/>
-    <param pos="0" name="os.vendor" value="Debian"/>
-    <param pos="0" name="os.family" value="Linux"/>
-    <param pos="0" name="os.product" value="Linux"/>
-    <param pos="0" name="os.version" value="3.1"/>
-    <param pos="0" name="os.cpe23" value="cpe:/o:debian:debian_linux:3.1"/>
-  </fingerprint>
-
-
   <fingerprint pattern="^OpenSSH_([^\s]+)\s+(Debian-\d+[+~]squeeze.*)$">
     <description>OpenSSH running on Debian 6.0 (squeeze)</description>
     <example service.version="5.5p1" openssh.comment="Debian-6+squeeze4">OpenSSH_5.5p1 Debian-6+squeeze4</example>
