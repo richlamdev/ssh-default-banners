@@ -3,3 +3,5 @@
 7.4p1-10	Debian 9 "Stretch" based	SSH-2.0-OpenSSH_7.4p1 Raspbian-10+deb9u1
 7.4p1-9		Debian 9 "Stretch" based	SSH-2.0-OpenSSH_7.4p1 Raspbian-9+deb9u1
 6.7p1-5		Debian 8 "Jessie" based		SSH-2.0-OpenSSH_6.7p1 Raspbian-5+deb8u1
+6.0p1-4		Debian 7 "Wheezy" based		SSH-2.0-OpenSSH_6.0p1 Debian-4
+6.0p1-2		Debian 7 "Wheezy" based		SSH-2.0-OpenSSH_6.0p1 Debian-2
