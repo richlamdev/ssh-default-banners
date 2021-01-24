@@ -241,6 +241,58 @@ local function get_debian(ssh_banner)
 end
 
 
+
+
+
+---
+-- obtain SSH+portable+build versions to identify Raspbian version.
+-- @param ssh_banner to be evaluated against regex
+-- @return Raspbian version and build number
+local function get_raspbian(ssh_banner)
+
+  local raspbian_ver =""
+  local r_ssh_build = ""
+  local r_build_version = ""
+  local r_ssh_version = ""
+
+-- start the match at 17 chars; typically: SSH-2.0-OpenSSH_
+
+-- identify longer SSH version length, eg. 6.6.1p1 
+-- keeping longer version match here for future use case(s)
+  if ssh_banner:match("%d+.%d+.%d+p%d+") then
+    r_ssh_version = ssh_banner:match("%d+.%d+.%d+p%d+",17) 
+  else                                            
+-- identify shorter SSH version length eg. 6.6p2
+    r_ssh_version = ssh_banner:match("%d+.%d+p%d+",17) 
+  end
+	  
+-- add 10 characters for _Raspbian- to obtain build number
+  local start_offset = 16 + string.len(r_ssh_version) + 10 
+
+-- obtain build version and concat to SSH version, then lookup version
+  r_build_version = ssh_banner:match("-%d+",start_offset)
+  r_ssh_build = r_ssh_version .. r_build_version
+
+-- https://github.com/richlamdev/ssh-default-banners
+  local d_table = {
+    ["8.1p1-1"] = "Debian 11.x Bullseye based",
+    ["7.9p1-10"] = "Debian 10.x Buster based",
+    ["7.4p-10"] = "Debian 9.x Stretch based",
+    ["7.4p-9"] = "Debian 9.x Stretch based",
+    ["6.7p1-5"] = "Debian 8.x Jessie based",
+  }
+
+  if d_table[r_ssh_build] then
+    raspbian_ver = d_table[r_ssh_build]
+  else
+    raspbian_ver = "Unknown Raspbian version"
+  end
+
+  return raspbian_ver,r_ssh_build
+end
+
+
+
 portrule = shortport.port_or_service( 22 , "ssh", "tcp", "open")
 
 action = function (host, port)
@@ -276,6 +328,12 @@ action = function (host, port)
     distro_type,ssh_build = get_debian(ssh_banner)
     response["Linux Version"] = distro_type
     response["SSH Version + Build Number"] = ssh_build
+
+  elseif ssh_banner:match("Raspbian", 22) then
+    distro_type,ssh_build = get_raspbian(ssh_banner)
+    response["Linux Version"] = distro_type
+    response["SSH Version + Build Number"] = ssh_build
+
   else
     distro_type = "Unrecognized SSH banner."
     response["Linux/Unix Version"] = distro_type
