@@ -1,0 +1,10 @@
+Allegro RomSSHell SSH			SSH-2.0-RomSSHell_4.62
+Array Networks Device			SSH-2.0-ArrayOS
+DraySSH					DrawySSHI_2.0
+HP Integrated Lights Out (iLO)		mpSSH_0.0.1
+Serv-U SSH				Serv-U_7.4.0.1
+WS_FTP Server with SSH			WS_FTP-SSH_6.1.1
+VxWorks with version information	IPSSH-6.9.0
+Cisco IOS or PIX (presently always 1.25 Cisco-1.25
+Cisco_WLC				Cisco_WLC
+

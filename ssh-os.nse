@@ -245,6 +245,29 @@ local function get_debian(ssh_banner)
 end
 
 
+local function get_misc(ssh_banner)
+
+  local ident = ""
+  local start_offset = 0 
+
+  if ssh_banner:match("SSH-%d.%d-",0) then
+    start_offset = 9
+  elseif ssh_banner:match("SSH-%d.%d%d-",0) then
+    start_offset = 10
+  end
+
+  if ssh_banner:match("ArrayOS",start_offset) then
+    ident = "Array Networks Device"
+  --elseif ssh_banner:match("^RomSSHell_%d.%d%d",start_offset) then
+  elseif ssh_banner:match("RomSSHell_%d.%d+",start_offset) then
+    ident = "Allegro RomSSHell SSH"
+
+  end 
+
+  return ident
+end
+  
+
 portrule = shortport.port_or_service( 22 , "ssh", "tcp", "open")
 
 action = function (host, port)
@@ -252,7 +275,9 @@ action = function (host, port)
   --local debug_output = "test output"
   local distro_type =""
   local ssh_build = ""
+  local misc_os_type = ""
   local response = stdnse.output_table()
+  
 
   local ssh_status, ssh_banner = comm.get_banner(host, port, {lines=1}) 
   if not ssh_status then
@@ -284,11 +309,14 @@ action = function (host, port)
       response["Linux Version"] = distro_type
       response["SSH Version + Build Number"] = ssh_build
   
-    else
-      distro_type = "Unrecognized SSH banner."
-      response["Linux/Unix Version"] = distro_type
     end
 
+  else
+    misc_os_type = get_misc(ssh_banner)
+    response["Manufacturer or Operating System"] = misc_os_type
+
+    --distro_type = "Unrecognized SSH banner."
+    --response["Linux/Unix Version"] = distro_type
   end
    
   --response["debug output"] = debug_output
