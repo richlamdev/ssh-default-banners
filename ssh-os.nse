@@ -227,6 +227,7 @@ local function get_debian(ssh_banner)
     ["7.4p-9"] = "Debian 9.x \"Stretch\" based",
     ["6.7p1-5"] = "Debian 8.x \"Jessie\" based",
     ["6.0p1-4"] = "Debian 7.x \"Wheezy\" based",
+    ["5.8p1-4"] = "Debian 6.x \"Squeeze\" based",
     ["5.5p1-6"] = "Debian 6.x \"Squeeze\" based",
     ["5.1p1-5"] = "Debian 5.x \"Lenny\" based",
     ["4.3p2-9"] = "Debian 4.x \"Etch\" based",
