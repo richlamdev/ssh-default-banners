@@ -259,31 +259,36 @@ action = function (host, port)
     return
   end
 
-  if ssh_banner:match("[uU]buntu",0) then
-    distro_type,ssh_build = get_ubuntu(ssh_banner)
-    response["Linux Version"] = distro_type
-    response["SSH Version + Build Number"] = ssh_build
+  -- OpenSSH based identification
+  if ssh_banner:match("OpenSSH_",7) then
 
--- Ubuntu 13.04 is the only version that does not have the string 
--- "[uU]buntu" embedded in the SSH version banner
--- (Also, Debian does not have a version released with OpenSSH 6.1p1) 
-  elseif ssh_banner:match("6.1p1 Debian-",16) then
-    distro_type,ssh_build = get_ubuntu(ssh_banner)
-    response["Linux Version"] = distro_type
-    response["SSH Version + Build Number"] = ssh_build
+    if ssh_banner:match("[uU]buntu",0) then
+      distro_type,ssh_build = get_ubuntu(ssh_banner)
+      response["Linux Version"] = distro_type
+      response["SSH Version + Build Number"] = ssh_build
+  
+    -- Ubuntu 13.04 is the only version that does not have the string 
+    -- "[uU]buntu" embedded in the SSH version banner
+    -- (Also, Debian does not have a version released with OpenSSH 6.1p1) 
+    elseif ssh_banner:match("6.1p1 Debian-",16) then
+      distro_type,ssh_build = get_ubuntu(ssh_banner)
+      response["Linux Version"] = distro_type
+      response["SSH Version + Build Number"] = ssh_build
+  
+    elseif ssh_banner:match("FreeBSD",20) then
+      distro_type = get_freebsd(ssh_banner)
+      response["BSD Version"] = distro_type
+  
+    elseif (ssh_banner:match("Debian", 22)) or (ssh_banner:match("Raspbian", 22)) then
+      distro_type,ssh_build = get_debian(ssh_banner)
+      response["Linux Version"] = distro_type
+      response["SSH Version + Build Number"] = ssh_build
+  
+    else
+      distro_type = "Unrecognized SSH banner."
+      response["Linux/Unix Version"] = distro_type
+    end
 
-  elseif ssh_banner:match("FreeBSD",20) then
-    distro_type = get_freebsd(ssh_banner)
-    response["BSD Version"] = distro_type
-
-  elseif (ssh_banner:match("Debian", 22)) or (ssh_banner:match("Raspbian", 22)) then
-    distro_type,ssh_build = get_debian(ssh_banner)
-    response["Linux Version"] = distro_type
-    response["SSH Version + Build Number"] = ssh_build
-
-  else
-    distro_type = "Unrecognized SSH banner."
-    response["Linux/Unix Version"] = distro_type
   end
    
   --response["debug output"] = debug_output
