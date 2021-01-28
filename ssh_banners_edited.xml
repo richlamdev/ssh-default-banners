@@ -66,14 +66,6 @@
 
 
 
-  <fingerprint pattern="^Cisco-(.*)$">
-    <description>Cisco SSH banner (could be IOS or PIX), The version always seems to be 1.25</description>
-    <example service.version="1.25">Cisco-1.25</example>
---
-  <fingerprint pattern="^CISCO_WLC$">
-    <description>SSH banner from a Cisco WLC (WLC)</description>
-    <example>CISCO_WLC</example>
---
   <fingerprint pattern="(?i)^Cleo (\S+)/(\S+) SSH FTP server$">
     <description>Cleo networks Harmony, VLProxy, VLTrader, others</description>
     <example service.product="Harmony" service.version="5.5.0.3">Cleo Harmony/5.5.0.3 SSH FTP server</example>

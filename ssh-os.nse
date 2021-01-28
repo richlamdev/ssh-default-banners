@@ -276,6 +276,10 @@ local function get_misc(ssh_banner)
       ident = "VxWorks with version information"
     elseif banner:match("^Cisco%-%d%.%d%d") then 
       ident = "Cisco SSH banner (could be IOS or PIX), The version always seems to be 1.25"
+    elseif banner:match("^CISCO_WLC") then 
+      ident = "SSH banner from a Cisco WLC (WLC)"
+    elseif banner:match("^Cleo %w+/%d+%. SSH FTP Server") then 
+      ident = "Cleo"
 
   end
 
