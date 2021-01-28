@@ -209,7 +209,7 @@ local function get_debian(ssh_banner)
     d_ssh_version = ssh_banner:match("%d+.%d+.%d+p%d+",17) 
   else                                            
 -- identify shorter SSH version length eg. 6.6p2
-    d_ssh_version = ssh_banner:match("%d+.%d+p%d+",17) 
+    d_ssh_version = ssh_banner:match("[%d+.%d+p%d+]",17) 
   end
 	  
 -- add 8 characters for _Debian- to obtain build number
@@ -249,20 +249,35 @@ local function get_misc(ssh_banner)
 
   local ident = ""
   local start_offset = 0 
+  local banner = ""
 
-  if ssh_banner:match("SSH-%d.%d-",0) then
+  if ssh_banner:match("^SSH%-%d%.%d%d%-",0) then
+    start_offset = 10 
+    banner = string.sub (ssh_banner, start_offset)
+
+  elseif ssh_banner:match("^SSH%-%d%.%d%-",0) then
     start_offset = 9
-  elseif ssh_banner:match("SSH-%d.%d%d-",0) then
-    start_offset = 10
+    banner = string.sub (ssh_banner, start_offset)
   end
 
-  if ssh_banner:match("ArrayOS",start_offset) then
-    ident = "Array Networks Device"
-  --elseif ssh_banner:match("^RomSSHell_%d.%d%d",start_offset) then
-  elseif ssh_banner:match("RomSSHell_%d.%d+",start_offset) then
-    ident = "Allegro RomSSHell SSH"
+  if       banner:match('ArrayOS',0) then 
+      ident = "Array Networks Device"
+    elseif banner:match("RomSSHell_%d%.%d%d-",0) then 
+      ident = "Allegro RomSSHell SSH"
+    elseif banner:match("^DraySSH",0) then 
+      ident = "Draytek generic"
+    elseif banner:match("^mpSSH_%d%.%d%.%d") then 
+      ident = "HP Integrated Lights Out (iLO) usually bundled with HP servers"
+    elseif banner:match("Serv%-U_%d%.%d%.%d%.%d") then 
+      ident = "Serv-U SSH"
+    elseif banner:match("WS_FTP%-SSH_%d%.%d+") then 
+      ident = "WS_FTP Server with SSH"
+    elseif banner:match("IPSSH%-%d%.%d%.%d") then 
+      ident = "VxWorks with version information"
+    elseif banner:match("^Cisco%-%d%.%d%d") then 
+      ident = "Cisco SSH banner (could be IOS or PIX), The version always seems to be 1.25"
 
-  end 
+  end
 
   return ident
 end
@@ -272,7 +287,7 @@ portrule = shortport.port_or_service( 22 , "ssh", "tcp", "open")
 
 action = function (host, port)
 
-  --local debug_output = "test output"
+  local debug_output = "test output"
   local distro_type =""
   local ssh_build = ""
   local misc_os_type = ""
@@ -308,6 +323,11 @@ action = function (host, port)
       distro_type,ssh_build = get_debian(ssh_banner)
       response["Linux Version"] = distro_type
       response["SSH Version + Build Number"] = ssh_build
+
+    else
+      distro_type,ssh_build = get_debian(ssh_banner)
+      response["Linux Version"] = distro_type
+      response["SSH Version + Build Number"] = ssh_build
   
     end
 
@@ -319,7 +339,7 @@ action = function (host, port)
     --response["Linux/Unix Version"] = distro_type
   end
    
-  --response["debug output"] = debug_output
+  response["debug output"] = debug_output
 
   response["SSH Banner"] = ssh_banner
 
