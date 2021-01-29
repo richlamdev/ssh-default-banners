@@ -64,33 +64,6 @@
     <description>OpenSSH w/o version or comment</description>
     <example>OpenSSH</example>
 
-
-
-  <fingerprint pattern="(?i)^Cleo (\S+)/(\S+) SSH FTP server$">
-    <description>Cleo networks Harmony, VLProxy, VLTrader, others</description>
-    <example service.product="Harmony" service.version="5.5.0.3">Cleo Harmony/5.5.0.3 SSH FTP server</example>
-    <example service.product="VLProxy" service.version="3.2">Cleo VLProxy/3.2 SSH FTP server</example>
---
-  <fingerprint pattern="^Sun_SSH_(.*)$">
-    <description>Sun SSH banner</description>
-    <example service.version="1.1">Sun_SSH_1.1</example>
---
-  <fingerprint pattern="^NetScreen$">
-    <description>Netscreen generic</description>
-    <example>NetScreen</example>
---
-  <fingerprint pattern="^HUAWEI-(?:[\d\.]+)$">
-    <description>Huawei generic</description>
-    <example>HUAWEI-1.5</example>
---
-  <fingerprint pattern="^HUAWEI-UMG(\d+)">
-    <description>Huawei Universal Media Gateway</description>
-    <example hw.model="8900">HUAWEI-UMG8900</example>
---
-  <fingerprint pattern="^HUAWEI.VRP.([\d\.]+)$">
-    <description>Huawei Versatile Routing Platform (VRP)</description>
-    <example os.version="3.10" service.version="3.10">HUAWEI-VRP-3.10</example>
-    <example os.version="8.0" service.version="8.0">HUAWEI_VRPV8.0</example>
 --
   <fingerprint pattern="^([\d.]+)[ _]sshlib:? (?i:GlobalScape)$">
     <description>GlobalScape SSH (which uses Bitvise sshlib)</description>

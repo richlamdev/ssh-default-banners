@@ -250,6 +250,7 @@ local function get_misc(ssh_banner)
   local ident = ""
   local start_offset = 0 
   local banner = ""
+  --local debugout = ""
 
   if ssh_banner:match("^SSH%-%d%.%d%d%-",0) then
     start_offset = 10 
@@ -278,8 +279,24 @@ local function get_misc(ssh_banner)
       ident = "Cisco SSH banner (could be IOS or PIX), The version always seems to be 1.25"
     elseif banner:match("^CISCO_WLC") then 
       ident = "SSH banner from a Cisco WLC (WLC)"
-    elseif banner:match("^Cleo %w+/%d+%. SSH FTP Server") then 
-      ident = "Cleo"
+    elseif banner:match("^Cleo Harmony/%d%.%d%.%d%.%d SSH") then 
+      ident = "Cleo networks Harmony, VLProxy, VLTrader, others"
+    elseif banner:match("^Cleo VLProxy/%d%.%d SSH") then 
+      ident = "Cleo networks Harmony, VLProxy, VLTrader, others"
+    elseif banner:match("^Sun_SSH_%d%.%d") then
+      ident = "Sun SSH banner"
+    elseif banner:match("^NetScreen") then
+      ident = "NetScreen generic"
+    elseif banner:match("^HUAWEI%-%d%.%d") then
+      ident = "Huawei generic"
+    elseif banner:match("^HUAWEI%-UMG%d%d%d%d") then
+      ident = "Huawei Universal Media Gateway"
+    elseif banner:match("^HUAWEI%-VRP%-%d%.%d%d") then
+      ident = "Huawei Versatile Routing Platform (VRP)"
+    elseif banner:match("^HUAWEI%_VRPV%d%.%d") then
+      ident = "Huawei Versatile Routing Platform (VRP)"
+    elseif banner:match("%d%.%d%d.sshlib Global") then
+      ident = "GlobalScape SSH (which uses Bitvise sshlib)"
 
   end
 
@@ -336,7 +353,7 @@ action = function (host, port)
     end
 
   else
-    misc_os_type = get_misc(ssh_banner)
+    misc_os_type,debug_output = get_misc(ssh_banner)
     response["Manufacturer or Operating System"] = misc_os_type
 
     --distro_type = "Unrecognized SSH banner."
