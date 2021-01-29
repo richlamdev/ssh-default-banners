@@ -3,7 +3,7 @@ local stdnse = require "stdnse"
 local comm = require "comm"
 
 description = [[
-Identifies Ubuntu, FreeBSD, Debian, or Raspbian version based on response of SSH banner.  
+Identifies Ubuntu, FreeBSD, or Debian version based on response of SSH banner.  
 
 Identifies the following versions:
 
@@ -73,18 +73,18 @@ local function get_ubuntu(ssh_banner)
 -- start the match at 17 chars; typically: SSH-2.0-OpenSSH_
 
 -- identify longer SSH version length, eg. 6.6.1p1 
-  if ssh_banner:match("%d%.%d%.%dp%d+") then
-    u_ssh_version = ssh_banner:match("%d%.%d%.%dp%d+",17) 
+  if ssh_banner:match("%d+.%d+.%d+p%d+") then
+    u_ssh_version = ssh_banner:match("%d+.%d+.%d+p%d+",17) 
   else                                            
 -- identify shorter SSH version length eg. 6.6p2
-    u_ssh_version = ssh_banner:match("%d%.%dp%d+",17) 
+    u_ssh_version = ssh_banner:match("%d+.%d+p%d+",17) 
   end
 	  
 -- add 8 characters for _Ubuntu- or _Debian- to obtain build number
   local start_offset = 16 + string.len(u_ssh_version) + 8
 
 -- obtain build version and concat to SSH version, then lookup version
-  u_build_version = ssh_banner:match("%-%d+",start_offset)
+  u_build_version = ssh_banner:match("-%d+",start_offset)
   u_ssh_build = u_ssh_version .. u_build_version
 
 -- https://github.com/richlamdev/ssh-default-banners
@@ -201,27 +201,22 @@ local function get_debian(ssh_banner)
   local d_ssh_build = ""
   local d_build_version = ""
   local d_ssh_version = ""
-  local start_offset = ""
 
 -- start the match at 17 chars; typically: SSH-2.0-OpenSSH_
 
 -- identify longer SSH version length, eg. 6.6.1p1 
-  if ssh_banner:match("%d%.%d%.%dp%d+") then
-    d_ssh_version = ssh_banner:match("%d%.%d%.%dp%d+",17) 
+  if ssh_banner:match("%d+.%d+.%d+p%d+") then
+    d_ssh_version = ssh_banner:match("%d+.%d+.%d+p%d+",17) 
   else                                            
 -- identify shorter SSH version length eg. 6.6p2
-    d_ssh_version = ssh_banner:match("%d%.%dp%d+",17) 
+    d_ssh_version = ssh_banner:match("[%d+.%d+p%d+]",17) 
   end
 	  
--- add 8 for Debian, or 10 for Raspbian to obtain build number
-  if ssh_banner:match ("Debian",22) then
-    start_offset = 16 + string.len(d_ssh_version) + 8
-  elseif ssh_banner:match ("Raspbian",22) then
-    start_offset = 16 + string.len(d_ssh_version) + 10
-  end
+-- add 8 characters for _Debian- to obtain build number
+  local start_offset = 16 + string.len(d_ssh_version) + 8
 
 -- obtain build version and concat to SSH version, then lookup version
-  d_build_version = ssh_banner:match("%-%d+",start_offset)
+  d_build_version = ssh_banner:match("-%d+",start_offset)
   d_ssh_build = d_ssh_version .. d_build_version
 
 -- https://github.com/richlamdev/ssh-default-banners
@@ -232,7 +227,6 @@ local function get_debian(ssh_banner)
     ["7.4p-9"] = "Debian 9.x \"Stretch\" based",
     ["6.7p1-5"] = "Debian 8.x \"Jessie\" based",
     ["6.0p1-4"] = "Debian 7.x \"Wheezy\" based",
-    ["6.0p1-2"] = "Debian 7.x \"Wheezy\" based",
     ["5.8p1-4"] = "Debian 6.x \"Squeeze\" based",
     ["5.5p1-6"] = "Debian 6.x \"Squeeze\" based",
     ["5.1p1-5"] = "Debian 5.x \"Lenny\" based",
@@ -251,15 +245,76 @@ local function get_debian(ssh_banner)
 end
 
 
+local function get_misc(ssh_banner)
+
+  local ident = ""
+  local start_offset = 0 
+  local banner = ""
+  --local debugout = ""
+
+  if ssh_banner:match("^SSH%-%d%.%d%d%-",0) then
+    start_offset = 10 
+    banner = string.sub (ssh_banner, start_offset)
+
+  elseif ssh_banner:match("^SSH%-%d%.%d%-",0) then
+    start_offset = 9
+    banner = string.sub (ssh_banner, start_offset)
+  end
+
+  if       banner:match('ArrayOS',0) then 
+      ident = "Array Networks Device"
+    elseif banner:match("RomSSHell_%d%.%d%d-",0) then 
+      ident = "Allegro RomSSHell SSH"
+    elseif banner:match("^DraySSH",0) then 
+      ident = "Draytek generic"
+    elseif banner:match("^mpSSH_%d%.%d%.%d") then 
+      ident = "HP Integrated Lights Out (iLO) usually bundled with HP servers"
+    elseif banner:match("Serv%-U_%d%.%d%.%d%.%d") then 
+      ident = "Serv-U SSH"
+    elseif banner:match("WS_FTP%-SSH_%d%.%d+") then 
+      ident = "WS_FTP Server with SSH"
+    elseif banner:match("IPSSH%-%d%.%d%.%d") then 
+      ident = "VxWorks with version information"
+    elseif banner:match("^Cisco%-%d%.%d%d") then 
+      ident = "Cisco SSH banner (could be IOS or PIX), The version always seems to be 1.25"
+    elseif banner:match("^CISCO_WLC") then 
+      ident = "SSH banner from a Cisco WLC (WLC)"
+    elseif banner:match("^Cleo Harmony/%d%.%d%.%d%.%d SSH") then 
+      ident = "Cleo networks Harmony, VLProxy, VLTrader, others"
+    elseif banner:match("^Cleo VLProxy/%d%.%d SSH") then 
+      ident = "Cleo networks Harmony, VLProxy, VLTrader, others"
+    elseif banner:match("^Sun_SSH_%d%.%d") then
+      ident = "Sun SSH banner"
+    elseif banner:match("^NetScreen") then
+      ident = "NetScreen generic"
+    elseif banner:match("^HUAWEI%-%d%.%d") then
+      ident = "Huawei generic"
+    elseif banner:match("^HUAWEI%-UMG%d%d%d%d") then
+      ident = "Huawei Universal Media Gateway"
+    elseif banner:match("^HUAWEI%-VRP%-%d%.%d%d") then
+      ident = "Huawei Versatile Routing Platform (VRP)"
+    elseif banner:match("^HUAWEI%_VRPV%d%.%d") then
+      ident = "Huawei Versatile Routing Platform (VRP)"
+    elseif banner:match("%d%.%d%d.sshlib Global") then
+      ident = "GlobalScape SSH (which uses Bitvise sshlib)"
+
+  end
+
+  return ident
+end
+  
+
 portrule = shortport.port_or_service( 22 , "ssh", "tcp", "open")
 
 action = function (host, port)
 
+  local debug_output = "test output"
   local distro_type =""
   local ssh_build = ""
   local misc_os_type = ""
   local response = stdnse.output_table()
   
+
   local ssh_status, ssh_banner = comm.get_banner(host, port, {lines=1}) 
   if not ssh_status then
     return
@@ -289,12 +344,23 @@ action = function (host, port)
       distro_type,ssh_build = get_debian(ssh_banner)
       response["Linux Version"] = distro_type
       response["SSH Version + Build Number"] = ssh_build
+
+    else
+      distro_type,ssh_build = get_debian(ssh_banner)
+      response["Linux Version"] = distro_type
+      response["SSH Version + Build Number"] = ssh_build
+  
     end
 
-  else --potential to identify non-OpenSSH banners in the future
-    distro_type = "Unrecognized SSH banner."
-    response["Linux/Unix Version"] = distro_type
+  else
+    misc_os_type,debug_output = get_misc(ssh_banner)
+    response["Manufacturer or Operating System"] = misc_os_type
+
+    --distro_type = "Unrecognized SSH banner."
+    --response["Linux/Unix Version"] = distro_type
   end
+   
+  response["debug output"] = debug_output
 
   response["SSH Banner"] = ssh_banner
 
