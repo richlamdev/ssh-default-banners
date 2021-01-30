@@ -15,7 +15,7 @@ FreeBSD 4.3 to 12.2-RELEASE
 
 Debian 3.x to 11.x (tentative 11.x version recognition)
 
-Raspbian 8.x to 11.x (tentative 11.x version recognition)
+Raspbian 7.x to 11.x (tentative 11.x version recognition)
 
 
 Note: The accuracy of the response is based on the default banner response.
