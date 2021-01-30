@@ -73,7 +73,7 @@ local function get_ubuntu(ssh_banner)
 -- start the match at 17 chars; typically: SSH-2.0-OpenSSH_
 
 -- identify longer SSH version length, eg. 6.6.1p1 
-  if ssh_banner:match("%d%.%d%.%dp%d+") then
+  if ssh_banner:match("%d%.%d%.%dp%d+",17) then
     u_ssh_version = ssh_banner:match("%d%.%d%.%dp%d+",17) 
   else                                            
 -- identify shorter SSH version length eg. 6.6p2
@@ -139,13 +139,14 @@ end
 -- @return FreeBSD version
 local function get_freebsd(ssh_banner)
 
-  local freebsd_ver =""
+  local freebsd_ver = ""
+  local f_ssh_version = ""
   
   -- determine longer banner with hpn13v11
-  if ssh_banner:match("hpn13v11",17,0) then
-    local f_ssh_version = ssh_banner:match("%d+",37,0)
+  if ssh_banner:match("hpn13v11",17) then
+    f_ssh_version = ssh_banner:match("%d+",37)
   else
-    f_ssh_version = ssh_banner:match("%d+",28,0) 
+    f_ssh_version = ssh_banner:match("%d+",28) 
   end
 	  
 -- https://github.com/richlamdev/ssh-default-banners
@@ -206,7 +207,7 @@ local function get_debian(ssh_banner)
 -- start the match at 17 chars; typically: SSH-2.0-OpenSSH_
 
 -- identify longer SSH version length, eg. 6.6.1p1 
-  if ssh_banner:match("%d%.%d%.%dp%d+") then
+  if ssh_banner:match("%d%.%d%.%dp%d+",17) then
     d_ssh_version = ssh_banner:match("%d%.%d%.%dp%d+",17) 
   else                                            
 -- identify shorter SSH version length eg. 6.6p2
@@ -268,7 +269,7 @@ action = function (host, port)
   -- OpenSSH based identification
   if ssh_banner:match("OpenSSH_",7) then
 
-    if ssh_banner:match("[uU]buntu",0) then
+    if ssh_banner:match("[uU]buntu",17) then
       distro_type,ssh_build = get_ubuntu(ssh_banner)
       response["Linux Version"] = distro_type
       response["SSH Version + Build Number"] = ssh_build
@@ -276,7 +277,7 @@ action = function (host, port)
     -- Ubuntu 13.04 is the only version that does not have the string 
     -- "[uU]buntu" embedded in the SSH version banner
     -- (Also, Debian does not have a version released with OpenSSH 6.1p1) 
-    elseif ssh_banner:match("6.1p1 Debian-",16) then
+    elseif ssh_banner:match("6%.1p1%sDebian%-",17) then
       distro_type,ssh_build = get_ubuntu(ssh_banner)
       response["Linux Version"] = distro_type
       response["SSH Version + Build Number"] = ssh_build
