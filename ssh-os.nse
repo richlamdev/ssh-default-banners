@@ -7,8 +7,8 @@ Identifies Ubuntu, FreeBSD, Debian, or Raspbian version based on response of SSH
 
 Identifies the following versions:
 
-Ubuntu 4.10 to 20.10
-FreeBSD 4.3 to 12.2-RELEASE
+Ubuntu 4.10 to 21.04
+FreeBSD 4.3 to 13.0-RELEASE
 Debian 3.x to 11.x (tentative 11.x version recognition)
 Raspbian 7.x to 11.x (tentative 11.x version recognition)
 
@@ -89,6 +89,7 @@ local function get_ubuntu(ssh_banner)
 
 -- https://github.com/richlamdev/ssh-default-banners
   local u_table = {
+    ["8.4p1-5"] = "Ubuntu 21.04 Hirsute Hippo",
     ["8.3p1-1"] = "Ubuntu 20.10 Groovy Gorilla",
     ["8.2p1-4"] = "Ubuntu 20.04 Focal Fossa",
     ["8.0p1-6"] = "Ubuntu 19.10 Eoan Ermine",
