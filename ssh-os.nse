@@ -228,7 +228,7 @@ local function get_debian(ssh_banner)
 
 -- https://github.com/richlamdev/ssh-default-banners
   local d_table = {
-    ["8.1p1-1"] = "Debian 11.x \"Bullseye\" based",
+    ["8.4p1-5"] = "Debian 11.x \"Bullseye\" based",
     ["7.9p1-10"] = "Debian 10.x \"Buster\" based",
     ["7.4p-10"] = "Debian 9.x \"Stretch\" based",
     ["7.4p-9"] = "Debian 9.x \"Stretch\" based",

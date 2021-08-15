@@ -1,4 +1,4 @@
-8.1p1-1		Debian 11.x Bullseye	SSH-2.0-OpenSSH_8.1p1 Debian-1+deb11u1
+8.4p1-5		Debian 11.x Bullseye	SSH-2.0-OpenSSH_8.4p1 Debian-5
 7.9p1-10	Debian 10.3 Buster	SSH-2.0-OpenSSH_7.9p1 Debian-10+deb10u2
 7.9p1-10	Debian 10.2 Buster	SSH-2.0-OpenSSH_7.9p1 Debian-10+deb10u1
 7.9p1-10	Debian 10.0 Buster	SSH-2.0-OpenSSH_7.9p1 Debian-10
