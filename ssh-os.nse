@@ -153,7 +153,7 @@ local function get_freebsd(ssh_banner)
 	  
 -- https://github.com/richlamdev/ssh-default-banners
   local f_table = {
-    ["20200214"] = "FreeBSD 12.2, or 13.0-RELEASE",
+    ["20200214"] = "FreeBSD 12.2, 12.3 or 13.0-RELEASE",
     ["20180909"] = "FreeBSD 12.0, or 12.1-RELEASE",
     ["20170903"] = "FreeBSD 11.2, or 11.3-RELEASE",
     ["20161230"] = "FreeBSD 11.1-RELEASE",
