@@ -89,6 +89,7 @@ local function get_ubuntu(ssh_banner)
 
 -- https://github.com/richlamdev/ssh-default-banners
   local u_table = {
+    ["8.9p1-3"] = "Ubuntu 22.04 Jammy Jellyfish",
     ["8.4p1-6"] = "Ubuntu 21.10 Impish Indri",
     ["8.4p1-5"] = "Ubuntu 21.04 Hirsute Hippo",
     ["8.3p1-1"] = "Ubuntu 20.10 Groovy Gorilla",

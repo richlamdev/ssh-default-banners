@@ -1,3 +1,4 @@
+22.04	8.9p1	-3	Jammy Jellyfish		SSH-2.0-OpenSSH_8.9p1 Ubuntu-3
 21.10	8.4p1	-6	Impish Indri		SSH-2.0-OpenSSH_8.4p1 Ubuntu-6ubuntu2
 21.04	8.4p1	-5	Hirsute Hippo		SSH-2.0-OpenSSH_8.4p1 Ubuntu-5ubuntu1
 20.10	8.3p1	-1	Groovy Gorilla		SSH-2.0-OpenSSH_8.3p1 Ubuntu-1
