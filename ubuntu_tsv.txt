@@ -1,3 +1,4 @@
+22.10	9.0p1	-1	Kinetic Kudu		SSH-2.0-OpenSSH_9.0p1 Ubuntu-1ubuntu7
 22.04	8.9p1	-3	Jammy Jellyfish		SSH-2.0-OpenSSH_8.9p1 Ubuntu-3
 21.10	8.4p1	-6	Impish Indri		SSH-2.0-OpenSSH_8.4p1 Ubuntu-6ubuntu2
 21.04	8.4p1	-5	Hirsute Hippo		SSH-2.0-OpenSSH_8.4p1 Ubuntu-5ubuntu1
