@@ -5,7 +5,7 @@ List of default banner responses for Debian, Ubuntu, and FreeBSD
 
 ## ssh-os.nse:
 
-Identifies Ubuntu, FreeBSD, or Debian version based on response of SSH banner.  
+Identifies Ubuntu, FreeBSD, or Debian version based on response of SSH banner.
 
 Identifies the following versions:
 
@@ -44,3 +44,11 @@ https://github.com/nmap/nmap/pull/1728
 #### Some banners from:
 
 https://github.com/rapid7/recog/blob/master/xml/ssh_banners.xml
+
+#### TODO:
+
+1. Update FreeBSD SSH banner recognition to regex entire banner response; this
+will better distinguish between FreeBSD versions.
+
+2. Migrate banner lookup references from within the script to external files.
+Eventually, the number of lookup tables within the script will be too unwieldly.
