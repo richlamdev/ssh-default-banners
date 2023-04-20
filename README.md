@@ -9,7 +9,7 @@ Identifies Ubuntu, FreeBSD, or Debian version based on response of SSH banner.
 
 Identifies the following versions:
 
-Ubuntu 4.10 to 22.10
+Ubuntu 4.10 to 23.04
 
 FreeBSD 4.3 to 13.1-RELEASE
 
