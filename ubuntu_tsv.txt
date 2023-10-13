@@ -1,3 +1,4 @@
+23.10	9.3p1	-1	Mantic Minotaur		SSH-2.0-OpenSSH_9.3p1 Ubuntu-1ubuntu3
 23.04	9.0p1	-1	Lunar Lobster		SSH-2.0-OpenSSH_9.0p1 Ubuntu-1ubuntu8
 22.10	9.0p1	-1	Kinetic Kudu		SSH-2.0-OpenSSH_9.0p1 Ubuntu-1ubuntu7
 22.04	8.9p1	-3	Jammy Jellyfish		SSH-2.0-OpenSSH_8.9p1 Ubuntu-3
