@@ -11,7 +11,7 @@ Identifies the following versions:
 
 Ubuntu 4.10 to 24.04
 
-FreeBSD 4.3 to 14.0-RELEASE
+FreeBSD 4.3 to 14.1-RELEASE
 
 Debian 3.x to 12.x
 
