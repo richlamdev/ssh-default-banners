@@ -89,6 +89,7 @@ local function get_ubuntu(ssh_banner)
 
 -- https://github.com/richlamdev/ssh-default-banners
   local u_table = {
+    ["9.7p1-7"] = "Ubuntu 24.10 Oracular Oriole",
     ["9.6p1-3"] = "Ubuntu 24.04 Noble Numbat",
     ["9.3p1-1"] = "Ubuntu 23.10 Mantic Minotaur",
     ["9.0p1-1"] = "Ubuntu 22.10 Kinetic Kudu or Ubuntu 23.04 Lunar Lobster",
