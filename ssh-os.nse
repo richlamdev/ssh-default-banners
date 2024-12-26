@@ -8,7 +8,7 @@ Identifies Ubuntu, FreeBSD, Debian, or Raspbian version based on response of SSH
 Identifies the following versions:
 
 Ubuntu 4.10 to 24.04
-FreeBSD 4.3 to 14.1-RELEASE
+FreeBSD 4.3 to 14.2-RELEASE
 Debian 3.x to 12.x
 Raspbian 7.x to 11.x (tentative 11.x version recognition)
 
@@ -158,6 +158,7 @@ local function get_freebsd(ssh_banner)
 
 -- https://github.com/richlamdev/ssh-default-banners
   local f_table = {
+    ["20240806"] = "FreeBSD 14.2-RELEASE",
     ["20240318"] = "FreeBSD 14.1-RELEASE",
     ["20231004"] = "FreeBSD 14.0-RELEASE",
     ["20230316"] = "FreeBSD 13.2-RELEASE",
