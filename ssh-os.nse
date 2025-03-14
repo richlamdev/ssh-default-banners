@@ -161,6 +161,7 @@ local function get_freebsd(ssh_banner)
     ["20240806"] = "FreeBSD 14.2-RELEASE",
     ["20240318"] = "FreeBSD 14.1-RELEASE",
     ["20231004"] = "FreeBSD 14.0-RELEASE",
+    ["20250219"] = "FreeBSD 13.5-RELEASE",
     ["20230316"] = "FreeBSD 13.2-RELEASE",
     ["20211221"] = "FreeBSD 13.1-RELEASE",
     ["20200214"] = "FreeBSD 12.2, 12.3, 12.4 or 13.0-RELEASE",
