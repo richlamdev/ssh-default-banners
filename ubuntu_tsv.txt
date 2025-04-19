@@ -1,3 +1,4 @@
+25.04	9.9p1	-3	Plucky Puffin		SSH-2.0-OpenSSH_9.9p1 Ubuntu-3ubuntu3
 24.10	9.7p1	-7	Oracular Oriole		SSH-2.0-OpenSSH_9.7p1 Ubuntu-7ubuntu4
 24.04	9.6p1	-3	Noble Numbat		SSH-2.0-OpenSSH_9.6p1 Ubuntu-3ubuntu13
 23.10	9.3p1	-1	Mantic Minotaur		SSH-2.0-OpenSSH_9.3p1 Ubuntu-1ubuntu3
