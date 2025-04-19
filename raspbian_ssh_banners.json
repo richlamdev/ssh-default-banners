@@ -1,0 +1,37 @@
+[
+  {
+    "openssh_version": "8.1p1-1",
+    "os_version": "Debian 11 \"Bullseye\" based",
+    "banner": "SSH-2.0-OpenSSH_8.1p1 Raspbian-1+deb11u1"
+  },
+  {
+    "openssh_version": "7.9p1-10",
+    "os_version": "Debian 10 \"Buster\" based",
+    "banner": "SSH-2.0-OpenSSH_7.9p1 Raspbian-10+deb10u1"
+  },
+  {
+    "openssh_version": "7.4p1-10",
+    "os_version": "Debian 9 \"Stretch\" based",
+    "banner": "SSH-2.0-OpenSSH_7.4p1 Raspbian-10+deb9u1"
+  },
+  {
+    "openssh_version": "7.4p1-9",
+    "os_version": "Debian 9 \"Stretch\" based",
+    "banner": "SSH-2.0-OpenSSH_7.4p1 Raspbian-9+deb9u1"
+  },
+  {
+    "openssh_version": "6.7p1-5",
+    "os_version": "Debian 8 \"Jessie\" based",
+    "banner": "SSH-2.0-OpenSSH_6.7p1 Raspbian-5+deb8u1"
+  },
+  {
+    "openssh_version": "6.0p1-4",
+    "os_version": "Debian 7 \"Wheezy\" based",
+    "banner": "SSH-2.0-OpenSSH_6.0p1 Debian-4"
+  },
+  {
+    "openssh_version": "6.0p1-2",
+    "os_version": "Debian 7 \"Wheezy\" based",
+    "banner": "SSH-2.0-OpenSSH_6.0p1 Debian-2"
+  }
+]
