@@ -1,6 +1,8 @@
 local shortport = require "shortport"
 local stdnse = require "stdnse"
 local comm = require "comm"
+local ubuntu_banners = require "ubuntu_ssh_banners"
+
 
 description = [[
 Identifies Ubuntu, FreeBSD, Debian, or Raspbian version based on response of SSH banner.
@@ -87,53 +89,9 @@ local function get_ubuntu(ssh_banner)
   u_build_version = ssh_banner:match("%-%d+",start_offset)
   u_ssh_build = u_ssh_version .. u_build_version
 
--- https://github.com/richlamdev/ssh-default-banners
-  local u_table = {
-    ["9.9p1-3"] = "Ubuntu 25.04 Plucky Puffin",
-    ["9.7p1-7"] = "Ubuntu 24.10 Oracular Oriole",
-    ["9.6p1-3"] = "Ubuntu 24.04 Noble Numbat",
-    ["9.3p1-1"] = "Ubuntu 23.10 Mantic Minotaur",
-    ["9.0p1-1"] = "Ubuntu 22.10 Kinetic Kudu or Ubuntu 23.04 Lunar Lobster",
-    ["8.9p1-3"] = "Ubuntu 22.04 Jammy Jellyfish",
-    ["8.4p1-6"] = "Ubuntu 21.10 Impish Indri",
-    ["8.4p1-5"] = "Ubuntu 21.04 Hirsute Hippo",
-    ["8.3p1-1"] = "Ubuntu 20.10 Groovy Gorilla",
-    ["8.2p1-4"] = "Ubuntu 20.04 Focal Fossa",
-    ["8.0p1-6"] = "Ubuntu 19.10 Eoan Ermine",
-    ["7.9p1-10"] = "Ubuntu 19.04 Disco Dingo",
-    ["7.7p1-4"] = "Ubuntu 18.10 Cosmic Cuttlefish",
-    ["7.6p1-4"] = "Ubuntu 18.04 Bionic Beaver",
-    ["7.5p1-10"] = "Ubuntu 17.10 Artful Aardvark",
-    ["7.4p1-10"] = "Ubuntu 17.04 Zesty Zapus",
-    ["7.3p1-1"] = "Ubuntu 16.10 Yakkety Yak",
-    ["7.2p2-4"] = "Ubuntu 16.04 Xenial Xerus",
-    ["6.9p1-2"] = "Ubuntu 15.10 Wily Werewolf",
-    ["6.7p1-5"] = "Ubuntu 15.04 Vivid Vervet",
-    ["6.6.1p1-8"] = "Ubuntu 14.10 Utopic Unicorn",
-    ["6.6.1p1-2"] = "Ubuntu 14.04 Trusty Tahr",
-    ["6.2p2-6"] = "Ubuntu 13.10 Saucy Salamander",
-    ["6.1p1-4"] = "Ubuntu 13.04 Raring Ringtail",
-    ["6.0p1-3"] = "Ubuntu 12.10 Quantal Quetzal",
-    ["5.9p1-5"] = "Ubuntu 12.04 Precise Pangolin",
-    ["5.8p1-7"] = "Ubuntu 11.10 Oneiric Ocelot",
-    ["5.8p1-1"] = "Ubuntu 11.04 Natty Narwhal",
-    ["5.5p1-4"] = "Ubuntu 10.10 Maverick Meerkat",
-    ["5.3p1-3"] = "Ubuntu 10.04 Lucid Lynx",
-    ["5.1p1-6"] = "Ubuntu 9.10 Karmic Koala",
-    ["5.1p1-5"] = "Ubuntu 9.04 Jaunty Jackalope",
-    ["5.1p1-3"] = "Ubuntu 8.10 Intrepid Ibex",
-    ["4.7p1-8"] = "Ubuntu 8.04 Hardy Heron",
-    ["4.6p1-5"] = "Ubuntu 7.10 Gutsy Gibbon",
-    ["4.3p2-8"] = "Ubuntu 7.04 Feisty Fawn",
-    ["4.3p2-5"] = "Ubuntu 6.10 Edgy Eft",
-    ["4.2p1-7"] = "Ubuntu 6.06 Dapper Drake",
-    ["4.1p1-7"] = "Ubuntu 5.10 Breezy Badger",
-    ["3.9p1-1"] = "Ubuntu 5.04 Hoary Hedgehog",
-    ["3.8.1p1-11"] = "Ubuntu 4.10 Warty Warthog"
-  }
-
-  if u_table[u_ssh_build] then
-    ubuntu_ver = u_table[u_ssh_build]
+  local entry = ubuntu_banners[u_ssh_build]
+  if entry and entry.codename then
+    ubuntu_ver = entry.name
   else
     ubuntu_ver = "Unknown Ubuntu version"
   end
