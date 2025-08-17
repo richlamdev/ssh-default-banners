@@ -13,7 +13,7 @@ Ubuntu 4.10 to 25.04
 
 FreeBSD 4.3 to 14.2-RELEASE
 
-Debian 3.x to 12.x
+Debian 3.x to 13.x
 
 Raspbian 7.x to 11.x (tentative 11.x version recognition)
 

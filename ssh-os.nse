@@ -9,7 +9,7 @@ Identifies the following versions:
 
 Ubuntu 4.10 to 25.04
 FreeBSD 4.3 to 14.2-RELEASE
-Debian 3.x to 12.x
+Debian 3.x to 13.x
 Raspbian 7.x to 11.x (tentative 11.x version recognition)
 
 
@@ -221,11 +221,11 @@ local function get_debian(ssh_banner)
 -- start the match at 17 chars; typically: SSH-2.0-OpenSSH_
 
 -- identify longer SSH version length, eg. 6.6.1p1
-  if ssh_banner:match("%d%.%d%.%dp%d+",17) then
-    d_ssh_version = ssh_banner:match("%d%.%d%.%dp%d+",17)
+  if ssh_banner:match("%d+%.%d+%.%dp%d+",17) then
+    d_ssh_version = ssh_banner:match("%d+%.%d+%.%dp%d+",17)
   else
 -- identify shorter SSH version length eg. 6.6p2
-    d_ssh_version = ssh_banner:match("%d%.%dp%d+",17)
+    d_ssh_version = ssh_banner:match("%d+%.%d+p%d+",17)
   end
 
 -- add 8 for Debian, or 10 for Raspbian to obtain build number
@@ -241,6 +241,7 @@ local function get_debian(ssh_banner)
 
 -- https://github.com/richlamdev/ssh-default-banners
   local d_table = {
+    ["10.0p2-7"] = "Debian 13.x \"Trixie\" based",
     ["9.2p1-2"] = "Debian 12.x \"Bookworm\" based",
     ["8.4p1-5"] = "Debian 11.x \"Bullseye\" based",
     ["7.9p1-10"] = "Debian 10.x \"Buster\" based",
