@@ -1,3 +1,4 @@
+10.0p2-7	Debian 13.x Trixie	SSH-2.0-OpenSSH_10.0p2 Debian-7
 9.2p1-2		Debian 12.x Bookworm	SSH-2.0-OpenSSH_9.2p1 Debian-2
 8.4p1-5		Debian 11.x Bullseye	SSH-2.0-OpenSSH_8.4p1 Debian-5
 7.9p1-10	Debian 10.3 Buster	SSH-2.0-OpenSSH_7.9p1 Debian-10+deb10u2
