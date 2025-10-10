@@ -7,7 +7,7 @@ Identifies Ubuntu, FreeBSD, Debian, or Raspbian version based on response of SSH
 
 Identifies the following versions:
 
-Ubuntu 4.10 to 25.04
+Ubuntu 4.10 to 25.10
 FreeBSD 4.3 to 14.2-RELEASE
 Debian 3.x to 13.x
 Raspbian 7.x to 11.x (tentative 11.x version recognition)
@@ -70,25 +70,36 @@ local function get_ubuntu(ssh_banner)
   local u_build_version = ""
   local u_ssh_version = ""
 
--- start the match at 17 chars; typically: SSH-2.0-OpenSSH_
 
--- identify longer SSH version length, eg. 6.6.1p1
-  if ssh_banner:match("%d%.%d%.%dp%d+",17) then
-    u_ssh_version = ssh_banner:match("%d%.%d%.%dp%d+",17)
-  else
--- identify shorter SSH version length eg. 6.6p2
-    u_ssh_version = ssh_banner:match("%d%.%dp%d+",17)
+  -- Find position of "OpenSSH_" dynamically for flexibility
+  local ver_start = ssh_banner:find("OpenSSH_")
+  if not ver_start then
+    return "Not OpenSSH", ""
   end
 
--- add 8 characters for _Ubuntu- or _Debian- to obtain build number
-  local start_offset = 16 + string.len(u_ssh_version) + 8
+  ver_start = ver_start + 8 -- skip "OpenSSH_"
 
--- obtain build version and concat to SSH version, then lookup version
-  u_build_version = ssh_banner:match("%-%d+",start_offset)
+  -- Try longer version first
+  u_ssh_version = ssh_banner:match("%d+%.%d+%.%dp%d+", ver_start)
+  if not u_ssh_version then
+    u_ssh_version = ssh_banner:match("%d+%.%dp%d+", ver_start)
+  end
+  if not u_ssh_version then
+    return "Unknown Ubuntu version", ""
+  end
+
+  -- After the SSH version, skip any spaces or "_Ubuntu-" etc.
+  local build_start = ssh_banner:find("Ubuntu%-", ver_start)
+  if build_start then
+    -- Build numbers like "-5ubuntu5"
+    u_build_version = ssh_banner:match("%-%d+", build_start)
+  end
+
   u_ssh_build = u_ssh_version .. u_build_version
 
 -- https://github.com/richlamdev/ssh-default-banners
   local u_table = {
+    ["10.0p2-5"] = "Ubuntu 25.10 Questing Quokka",
     ["9.9p1-3"] = "Ubuntu 25.04 Plucky Puffin",
     ["9.7p1-7"] = "Ubuntu 24.10 Oracular Oriole",
     ["9.6p1-3"] = "Ubuntu 24.04 Noble Numbat",
