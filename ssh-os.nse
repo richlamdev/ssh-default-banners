@@ -7,7 +7,7 @@ Identifies Ubuntu, FreeBSD, Debian, or Raspbian version based on response of SSH
 
 Identifies the following versions:
 
-Ubuntu 4.10 to 25.04
+Ubuntu 4.10 to 25.10
 FreeBSD 4.3 to 14.2-RELEASE
 Debian 3.x to 13.x
 Raspbian 7.x to 11.x (tentative 11.x version recognition)
@@ -89,6 +89,7 @@ local function get_ubuntu(ssh_banner)
 
 -- https://github.com/richlamdev/ssh-default-banners
   local u_table = {
+    ["10.0p2-5"] = "Ubuntu 25.10 Questing Quokka",
     ["9.9p1-3"] = "Ubuntu 25.04 Plucky Puffin",
     ["9.7p1-7"] = "Ubuntu 24.10 Oracular Oriole",
     ["9.6p1-3"] = "Ubuntu 24.04 Noble Numbat",
