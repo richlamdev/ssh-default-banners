@@ -7,15 +7,7 @@ List of default banner responses for Debian, Ubuntu, and FreeBSD
 
 Identifies Ubuntu, FreeBSD, or Debian version based on response of SSH banner.
 
-Identifies the following versions:
-
-Ubuntu 4.10 to 25.10
-
-FreeBSD 4.3 to 14.2-RELEASE
-
-Debian 3.x to 13.x
-
-Raspbian 7.x to 11.x (tentative 11.x version recognition)
+Refer to ssh-os.nse for specific versions detected.
 
 
 Note: The accuracy of the response is based on the default banner response.
@@ -50,5 +42,4 @@ https://github.com/rapid7/recog/blob/master/xml/ssh_banners.xml
 1. Update FreeBSD SSH banner recognition to regex entire banner response; this
 will better distinguish between FreeBSD versions.
 
-2. Migrate banner lookup references from within the script to external files.
-Eventually, the number of lookup tables within the script will be too unwieldly.
+2. Update Raspbian versions. (probably will never happen)
