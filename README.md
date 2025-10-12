@@ -1,13 +1,13 @@
 # ssh-default-banners
 Default SSH banner responses
 
-List of default banner responses for Debian, Ubuntu, and FreeBSD
+List of default banner responses for [Ubuntu](ubuntu_tsv.txt), [FreeBSD](freebsd_tsv.txt), and [Debian](debian_tsv.txt).
 
 ## ssh-os.nse:
 
 Identifies Ubuntu, FreeBSD, or Debian version based on response of SSH banner.
 
-Refer to ssh-os.nse for specific versions detected.
+Refer to [ssh-os.nse](ssh-os.nse) for specific versions detected.
 
 
 Note: The accuracy of the response is based on the default banner response.
