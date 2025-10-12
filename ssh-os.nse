@@ -1,7 +1,7 @@
 local shortport = require "shortport"
 local stdnse = require "stdnse"
 local comm = require "comm"
-local ubuntu_versions = require "ubuntu-versions"
+local ubuntu_versions = require "tables.ubuntu-versions"
 
 description = [[
 Identifies Ubuntu, FreeBSD, Debian, or Raspbian version based on response of SSH banner.
