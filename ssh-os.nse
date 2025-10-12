@@ -3,6 +3,7 @@ local stdnse = require "stdnse"
 local comm = require "comm"
 local ubuntu_versions = require "tables.ubuntu-versions"
 local freebsd_versions = require "tables.freebsd-versions"
+local debian_versions = require "tables.debian-versions"
 
 description = [[
 Identifies Ubuntu, FreeBSD, Debian, or Raspbian version based on response of SSH banner.
@@ -125,7 +126,6 @@ local function get_freebsd(ssh_banner)
     f_ssh_version = ssh_banner:match("%d+",28)
   end
 
-
   -- lookup version from tables/freebsd-versions.lua
   if freebsd_versions[f_ssh_version] then
     freebsd_ver = freebsd_versions[f_ssh_version]
@@ -169,27 +169,9 @@ local function get_debian(ssh_banner)
   d_build_version = ssh_banner:match("%-%d+",start_offset)
   d_ssh_build = d_ssh_version .. d_build_version
 
--- https://github.com/richlamdev/ssh-default-banners
-  local d_table = {
-    ["10.0p2-7"] = "Debian 13.x \"Trixie\" based",
-    ["9.2p1-2"] = "Debian 12.x \"Bookworm\" based",
-    ["8.4p1-5"] = "Debian 11.x \"Bullseye\" based",
-    ["7.9p1-10"] = "Debian 10.x \"Buster\" based",
-    ["7.4p-10"] = "Debian 9.x \"Stretch\" based",
-    ["7.4p-9"] = "Debian 9.x \"Stretch\" based",
-    ["6.7p1-5"] = "Debian 8.x \"Jessie\" based",
-    ["6.0p1-4"] = "Debian 7.x \"Wheezy\" based",
-    ["6.0p1-2"] = "Debian 7.x \"Wheezy\" based",
-    ["5.8p1-4"] = "Debian 6.x \"Squeeze\" based",
-    ["5.5p1-6"] = "Debian 6.x \"Squeeze\" based",
-    ["5.1p1-5"] = "Debian 5.x \"Lenny\" based",
-    ["4.3p2-9"] = "Debian 4.x \"Etch\" based",
-    ["3.8.1p1-8"] = "Debian 3.1 \"Woody\" based",
-    ["3.4p1-1"] = "Debian 3.0 \"Woody\" based"
-  }
-
-  if d_table[d_ssh_build] then
-    debian_ver = d_table[d_ssh_build]
+  -- lookup version from tables/debian-versions.lua
+  if debian_versions[d_ssh_build] then
+    debian_ver = debian_versions[d_ssh_build]
   else
     debian_ver = "Unknown Debian based (or Raspbian) version"
   end
