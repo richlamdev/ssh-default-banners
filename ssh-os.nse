@@ -11,7 +11,7 @@ Identifies Ubuntu, FreeBSD, Debian, or Raspbian version based on response of SSH
 Identifies the following versions:
 
 Ubuntu 4.10 to 25.10
-FreeBSD 4.3 to 14.2-RELEASE
+FreeBSD 4.3 to 15.0-RELEASE
 Debian 3.x to 13.x
 Raspbian 7.x to 11.x (tentative 11.x version recognition)
 
