@@ -4,6 +4,7 @@
 -- Source: https://github.com/richlamdev/ssh-default-banners
 
 return {
+  ["20250801"] = "FreeBSD 15.0-RELEASE",
   ["20250219"] = "FreeBSD 13.5-RELEASE",
   ["20240806"] = "FreeBSD 14.2-RELEASE",
   ["20240318"] = "FreeBSD 14.1-RELEASE",
