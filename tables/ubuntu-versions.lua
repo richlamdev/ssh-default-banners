@@ -4,6 +4,7 @@
 -- Source: https://github.com/richlamdev/ssh-default-banners
 
 return {
+  ["10.2p1-2"] = "Ubuntu 26.04 Resolute Raccoon",
   ["10.0p2-5"] = "Ubuntu 25.10 Questing Quokka",
   ["9.9p1-3"] = "Ubuntu 25.04 Plucky Puffin",
   ["9.7p1-7"] = "Ubuntu 24.10 Oracular Oriole",
