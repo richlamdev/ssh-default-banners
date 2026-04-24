@@ -1,3 +1,4 @@
+26.04	10.2p1	-2	Resolute Raccoon	SSH-2.0-OpenSSH_10.2p1 Ubuntu-2ubuntu3
 25.10	10.0p2	-5	Questing Quokka		SSH-2.0-OpenSSH_10.0p2 Ubuntu-5ubuntu5
 25.04	9.9p1	-3	Plucky Puffin		SSH-2.0-OpenSSH_9.9p1 Ubuntu-3ubuntu3
 24.10	9.7p1	-7	Oracular Oriole		SSH-2.0-OpenSSH_9.7p1 Ubuntu-7ubuntu4
